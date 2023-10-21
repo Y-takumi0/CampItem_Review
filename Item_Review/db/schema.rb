@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2023_10_19_132222) do
     t.integer "user_id", null: false
     t.integer "item_id", null: false
     t.text "article", null: false
-    t.boolean "disp_status", default: true, null: false
+    t.boolean "display_status", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -21,7 +21,7 @@ devise_for :admin, skip: [:registrations, :passwords], controllers: {
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:new, :index, :update, :create, :destroy]
-    resources :commens, only: [:show, :update]
+    resources :comments, only: [:update]
     resources :categorys, only: [:index, :create, :edit, :update]
  end
 
