@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <!-- 登録情報更新のフラッシュメッセージ-->
+    <div class="text-green">
+      <%= flash[:update] %>
+    </div>
+    <!-- -->
+    <h4 class="my-5 bg-light">マイページ</h4>
+  </div>
+  <div class="d-flex align-items-center">
+    <h3><b>登録情報</b></h3>
+    <%= link_to "編集する", edit_user_path, class:"btn btn-success ml-3" %>
+  </div>
+  <table class="table table-bordered col-md-8">
+    <tr>
+      <td class="bg-light col-md-3">ネーム</td>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <td class="bg-light col-md-3">プロフィール</td>
+      <td><%= @user.plofile %></td>
+    </tr>
+    <tr>
+      <td class="bg-light col-md-3">メールアドレス</td>
+      <td><%= @user.email %></td>
+    </tr>
+  </table>
+     </div>
+</div>

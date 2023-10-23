@@ -10,6 +10,34 @@
   </head>
 
   <body>
+    <header>
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container">
+
+        <ul class="nav-item nav navbar-nav navbar-right">
+          <!-- ユーザーサインイン時のヘッダー -->
+          <% if user_signed_in? %>
+            <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'マイページ', user_path(current_user.id), class:"nav-link"%></li>
+            <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'アイテム一覧', items_path, class:"nav-link" %></li>
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
+
+          <!-- アドミンサインイン時のヘッダー -->
+          <% elsif admin_signed_in? %>
+            <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'アイテム一覧', admin_items_path, class:"nav-link" %></li>
+            <li type="button" class="btn btn-outline-dark mr-3"><%= link_to '会員一覧', admin_users_path, class:"nav-link" %></li>
+            <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'ジャンル一覧', admin_categorys_path, class:"nav-link" %></li>
+            <li type="button" class="btn btn-outline-dark"><%= link_to 'ログアウト', destroy_admin_session_path, method: :delete, class:"nav-link" %></li>
+
+          <!-- ログアウト時のヘッダー -->
+          <% else %>
+            <li type="button" class="btn btn-outline-dark mr-3"><%= link_to "新規登録", new_user_registration_path, class:"nav-link" %></li>
+            <li type="button" class="btn btn-outline-dark"><%= link_to "ログイン", new_user_session_path, class:"nav-link" %></li>
+          <% end %>
+        </ul>
+
+        </div>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>

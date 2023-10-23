@@ -2,7 +2,7 @@ class Public::UsersController < ApplicationController
 before_action :authenticate_user!
 
   def show
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def edit
@@ -12,10 +12,16 @@ before_action :authenticate_user!
   def update
     @user = current_user
     if @user.update(customer_params)
-      redirect_to user_path(@userr)
+      redirect_to user_path(@user)
       flash[:update] = "登録情報が更新されました。"
     else
       render :edit
     end
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :email)
   end
 end

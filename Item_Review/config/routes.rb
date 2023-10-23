@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'homes/top'
   root to: 'homes#top'
 
   devise_for :users, skip: [:passwords], controllers: {
@@ -8,12 +7,8 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+    post 'user/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
-
-  devise_for :users, controllers: {
-    registrations: 'users/registrations'
-  }
 
   scope module: :public do
     resources :items, only: [:index, :show, :new, :edit, :create, :update]

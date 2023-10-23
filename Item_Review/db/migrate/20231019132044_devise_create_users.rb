@@ -14,7 +14,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       ## Rememberable
       t.datetime :remember_created_at
       t.string :name, null: false
-      t.string :plofile, null: false
+      t.string :plofile
       t.boolean :is_active, null: false, default: true
 
       ## Trackable

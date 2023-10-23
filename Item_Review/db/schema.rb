@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2023_10_19_132222) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", null: false
-    t.string "plofile", null: false
+    t.string "plofile"
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
