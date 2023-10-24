@@ -11,7 +11,7 @@ before_action :authenticate_user!
 
   def update
     @user = current_user
-    if @user.update(customer_params)
+    if @user.update(user_params)
       redirect_to user_path(@user)
       flash[:update] = "登録情報が更新されました。"
     else
@@ -22,6 +22,6 @@ before_action :authenticate_user!
   private
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :plofile, :image)
   end
 end

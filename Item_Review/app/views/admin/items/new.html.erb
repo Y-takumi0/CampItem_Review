@@ -23,7 +23,7 @@
     <strong class="my-2 col-sm-3">カテゴリー</strong>
     <div class="my-2 col-sm-9">
       <%= f.collection_select :category_id, Category.all, :id,:name,{prompt: "--選択してください--"} %>
-      <%= link_to "カテゴリーの追加", categories_path, class:"btn btn-success ml-3" %>
+      <%= link_to "カテゴリーの追加", admin_categories_path, class:"btn btn-success ml-3" %>
     </div>
 
     <!--  商品税抜価格の追加 -->

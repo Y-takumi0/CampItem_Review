@@ -1,28 +1,27 @@
 class Admin::CategoriesController < ApplicationController
 before_action :set_category, only: [:edit, :update]
 
-  def index
+   def index
     @categories = Category.all
     @category = Category.new
   end
 
   def create
-    @category = Genre.new(genre_params)
+    @category = Category.new(category_params)
     if @category.save
-      redirect_to admin_categorys_path
+      redirect_to categories_path
       @categories = Category.all
-      render :index
     end
   end
 
   def update
-    if @category.update(genre_params)
-      redirect_to admin_categorys_path
+    if @category.update(category_params)
+      redirect_to categories_path
     else
       render :edit
     end
   end
-  
+
   private
   def set_category
     @category = Category.find(params[:id])
