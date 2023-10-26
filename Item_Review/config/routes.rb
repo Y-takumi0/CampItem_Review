@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root to: 'homes#top'
+  get "search" => "searches#search"
 
   devise_for :users, skip: [:passwords], controllers: {
     registrations: "public/registrations",
@@ -15,8 +16,8 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update]
     resources :reviews, only: [:new, :index, :update, :create, :destroy]
     resources :comments, only: [:update, :create]
-    resources :categories, only: [:index, :create, :edit, :update]
     resources :follows, only: [:create, :index, :update]
+    get "search" => "items#search"
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :update]
     resources :reviews, only: [:new, :index, :update, :create, :destroy]
     resources :comments, only: [:update]
     resources :categories, only: [:index, :create, :edit, :update]

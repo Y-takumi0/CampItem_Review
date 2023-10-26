@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
-
-  belongs_to :item, optional: true
   validates :name, presence: true
+  has_many :item_categories, dependent: :destroy
+  has_many :items, through: :item_categories
 
 end

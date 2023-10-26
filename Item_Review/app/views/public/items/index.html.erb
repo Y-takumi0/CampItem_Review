@@ -1,35 +1,57 @@
 <div class="container">
   <div class="row">
-    <h4 class="my-3 bg-light">アイテム一覧</h4>
-    <!-- 商品追加ページボタン -->
-    <div class="col-10 text-right">
+    <h4>アイテム一覧</h4>
+  <div>
+  </div>
+    <div>
       <%= link_to new_item_path do %>
-        <button type="button" class="btn btn-outline-dark rounded-circle p-0" style="width:2rem;height:2rem;">
+        <button type="button">
           ＋
         </button>
       <% end %>
     </div>
-    <!--  -->
   </div>
-  <!-- 商品一覧 -->
-  <table class="table table-striped">
+  <div class="d-flex justify-content-end">
+  <%= form_with url: items_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
+      <%= select_tag :category_id,
+        options_from_collection_for_select(Category.all, :id, :name, params[:category_id]),
+          {
+            prompt: "カテゴリーで絞り込み",
+            onchange: "submit(this.form);"
+          }
+      %>
+  <% end %>
+</div>
+  <table>
     <thead>
       <tr>
-        <th>商品名</th>
-        <th>税抜価格</th>
+        <th>アイテム画</th>
+        <th>アイテム名</th>
+        <th>価格</th>
         <th>カテゴリー</th>
-        <th>販売開始</th>
+        <th>販売開始日</th>
       </tr>
     </thead>
-    <% @item.each do |item| %>
+    <% @items.each do |item| %>
       <tr>
+        <td>
+          <%= link_to item_path(item.id) do %>
+            <% if item.image.attached? %>
+              <%= image_tag item.image, size: "100x100" %>
+            <% else %>
+              <%= image_tag 'no-image', size: "100x100" %>
+            <% end %>
+          <% end %>
+        </td>
         <td>
           <%= link_to item_path(item.id) do %>
           <%= item.name %>
           <% end %>
         </td>
         <td><%= item.price %></td>
-        <td><%= item.category.name %></td>
+        <td>
+            <%= item.categories.pluck(:name).join(",") %>
+        </td>
         <td><%= item.on_sale %></td>
       </tr>
     <% end %>

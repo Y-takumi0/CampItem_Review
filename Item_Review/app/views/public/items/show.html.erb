@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <h4 class="my-3 bg-light">アイテム詳細</h4>
+  <div class="row">
+    <img class="col-sm-3" style="width: 200px; height: 200px;" src="<%= url_for(@item.image) %>">
+    <div class="col-sm-9">
+      <!-- 商品名の表示 -->
+      <strong class="col-sm-3">アイテム名</strong>
+      <div class="my-2 col-sm-9"><%= @item.name %></div>
+      <!-- 商品説明の表示 -->
+      <strong class="col-sm-3">アイテム説明</strong>
+      <div class="my-2 col-sm-6"><%= @item.introduction %></div>
+      <!-- 商品ジャンルの表示 -->
+      <strong class="col-sm-3">カテゴリー</strong>
+      <%= @item.categories.pluck(:name).join(",") %>
+      <!-- 商品価格の表示 -->
+      <strong class="col-sm-3">価格</strong>
+      <div class="my-2 col-sm-9">
+        <%= (@item.price).floor.to_s(:delimited) %>円
+      </div>
+      <strong class="col-sm-3">販売開始日</strong>
+      <div class="my-2 col-sm-9"><%= @item.on_sale %></div>
+      <!--  -->
+      <div class="col-sm-3">
+        <%= link_to "編集する",edit_item_path(@item), class:"btn btn-success" %>
+        <%= link_to "レビューを書く",new_review_path, class:"btn btn-success" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container mt-5">
+  <!-- 更新成功表示 -->
+  <p>
+    <%= flash[:notice] %>
+  </p>
+  <div class="row">
+    <%= form_with model: @user, url: admin_user_path(@user), method: :patch, local: true do |f| %>
+  <h2 class="my-3 bg-light"><%= @user.name %>さんの会員詳細</h2>
+  <div class="row">
+    <!-- 会員IDの表示 -->
+    <span class="my-2 col-sm-9">
+    <% if @user.image.attached? %>
+      <%= image_tag @user.image, size: "200x200" %>
+    <% else %>
+      <%= image_tag 'no-image', size: "200x200" %>
+    <% end %></span>
+    <!-- 会員名の表示 -->
+    <strong class="my-2 col-sm-3">ネーム</strong>
+    <span class="my-2 col-sm-9"><%= @user.name %></span>
+    <!-- 会員名(フリガナ)の表示 -->
+    <strong class="my-2 col-sm-3">プロフィール</strong>
+    <span class="my-2 col-sm-9"><%= @user.plofile %></span>
+    <strong class="my-2 col-sm-3">メールアドレス </strong>
+    <span class="my-2 col-sm-9"><%= @user.email %></span>
+    <!-- 会員ステータスの表示 -->
+    <strong class="my-2 col-sm-3">会員ステータス </strong>
+    <span class="my-2 col-sm-9 color:<%= @user.is_active ? 'green' : 'gray' %>;"><%= @user.is_active ? '有効' : '退会済み' %></span>
+    <!--  -->
+  </div>
+
+  <strong class="my-2 col-sm-3">会員ステータスの更新</strong>
+      <div class="my-2 col-sm-9">
+        <%= f.radio_button :is_active, "ture" %>
+        <%= f.label :is_active, "有効" %>
+        <%= f.radio_button :is_active, "false" %>
+        <%= f.label :is_active, "退会" %>
+      </div>
+      <!-- 更新ボタンの調整 -->
+      <div class="my-2 col-lg-3"></div>
+      <div class="my-2 col-lg-9"><%= f.submit "変更を保存", class: "btn btn-success" %></div>
+    </div>
+    <% end %>
+</div>
