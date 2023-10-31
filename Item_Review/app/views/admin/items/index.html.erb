@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="d-flex justify-content-end">
-  <%= form_with url: items_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
+  <%= form_with url: admin_items_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
       <%= select_tag :category_id,
         options_from_collection_for_select(Category.all, :id, :name, params[:category_id]),
           {
@@ -35,7 +35,7 @@
     <% @item.each do |item| %>
       <tr>
         <td>
-          <%= link_to item_path(item.id) do %>
+          <%= link_to admin_item_path(item.id) do %>
             <% if item.image.attached? %>
               <%= image_tag item.image, size: "100x100" %>
             <% else %>
@@ -44,13 +44,13 @@
           <% end %>
         </td>
         <td>
-          <%= link_to item_path(item.id) do %>
+          <%= link_to admin_item_path(item.id) do %>
           <%= item.name %>
           <% end %>
         </td>
         <td><%= item.price %></td>
         <td>
-            <%= item.category.name %>
+            <%= item.categories.pluck(:name).join(",") %>
         </td>
         <td><%= item.on_sale %></td>
       </tr>

@@ -1,8 +1,9 @@
 class Public::UsersController < ApplicationController
 before_action :authenticate_user!
+before_action :ensure_guest_user, only: [:edit]
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def edit
@@ -23,5 +24,11 @@ before_action :authenticate_user!
 
   def user_params
     params.require(:user).permit(:name, :email, :plofile, :image)
+  end
+
+  def ensure_guest_user
+   if current_user.guest_user?
+     redirect_to user_path(current_user), notice: "ゲストユーザーはプロフィール編集できません。"
+   end
   end
 end

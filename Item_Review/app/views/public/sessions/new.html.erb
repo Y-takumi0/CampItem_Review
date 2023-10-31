@@ -1,4 +1,7 @@
 <h4 class="my-5 col-sm-2 text-center bg-light">ログイン</h4>
+    <p>
+      <%= flash[:error] %>
+    </p>
 
 <%= form_with model: @user, url: user_session_path(current_user) do |f| %>
   <table  class="table table-borderless">
@@ -6,7 +9,6 @@
           <td>メールアドレス</td>
           <td><%= f.text_field :email, autofocus: true, :size=>"40" %></td>
         </tr>
-
         <tr>
           <td>パスワード</td>
           <td><%= f.password_field :password, autofocus: true, :size=>"40" %></td>

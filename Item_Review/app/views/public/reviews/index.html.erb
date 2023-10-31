@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <h4>レビュー一覧</h4>
+  <div class="d-flex justify-content-end">
+    <% @review.each do |review| %>
+      <tr>
+        <td>
+          <%= link_to user_path(review.user.id) do %>
+          <%= review.user.name %>
+          <% end %>
+        </td>
+        <td><%= review.star %></td>
+        <td>
+            <%= review.article %>
+        </td>
+      </tr>
+    <% end %>
+</div>
+</div>
+</div>

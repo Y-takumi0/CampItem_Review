@@ -1,0 +1,23 @@
+<%= form_with(model: [item, review], url: reviews_path(item), local: true) do |f| %>
+
+
+    <%= f.text_area :article, rows:'5', placeholder: "商品のコメント", class: "form-control form-control-sm" %>
+    <div id="rating-form">
+        <label>評価：</label>
+        <%# scoreNameの値をhidden_fieldでカラムに送っている %>
+        <%= f.hidden_field :star, :value => 'score' %>
+        <script>
+  let elem = document.querySelector('#stars');
+  let opt = {
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    scoreName: 'review[star]'
+  };
+  window.raty(elem, opt);
+</script>
+    </div>
+
+    <%= f.submit "投稿する" %>
+<% end %>
+

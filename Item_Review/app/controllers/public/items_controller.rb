@@ -4,7 +4,7 @@ class Public::ItemsController < ApplicationController
   end
 
     def index
-    
+
     # 追加：params[:category_id]の値が存在する場合、タグ検索を実施
       if params[:category_id].present?
          @category = Category.find(params[:category_id])
@@ -16,6 +16,8 @@ class Public::ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @review = Review.new
+    @comment = Comment.new
   end
 
   def edit
@@ -45,7 +47,7 @@ class Public::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :introduction, :price, :on_sale, :image, category_ids:[])
+    params.require(:item).permit(:name, :introduction, :price, :on_sale, :image,  :star, category_ids:[])
   end
 
 end

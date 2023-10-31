@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   scope module: :public do
     resources :items, only: [:index, :show, :new, :edit, :create, :update]
     resources :users, only: [:show, :edit, :update]
-    resources :reviews, only: [:new, :index, :update, :create, :destroy]
+    resources :reviews, only: [:new, :index, :create, :destroy]
     resources :comments, only: [:update, :create]
     resources :follows, only: [:create, :index, :update]
     get "search" => "items#search"
