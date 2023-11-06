@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="row">
+<div>
+  <div>
     <!-- 登録情報更新のフラッシュメッセージ-->
     <div class="text-green">
       <p>
@@ -7,18 +7,18 @@
       </p>
     </div>
     <!-- -->
-    <h4 class="my-5 bg-light">マイページ</h4>
+    <h1><%= @user.name %>さんの詳細ページ</h1>
   </div>
-  <div class="d-flex align-items-center">
+  <div>
     <h3><b>登録情報</b></h3>
     <% if @user.id == current_user.id %>
-      <%= link_to "編集する", edit_user_path, class:"btn btn-success ml-3" %>
-      <div class= " edit btn btn-outline-secondary btn-default btn-block" ><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span></div>
+      <%= link_to "編集する", edit_user_path %>
+      <div><span></span></div>
       <% end %>
   </div>
-  <table class="table table-bordered col-md-8">
+  <table class="table table-hover table-inverse">
     <tr>
-      <td class="bg-light col-md-3">ネーム</td>
+      <td>ネーム</td>
       <td><%= @user.name %></td>
     </tr>
     <tr>
@@ -37,5 +37,48 @@
       <td><%= @user.email %></td>
     </tr>
   </table>
+  <strong><%= @user.name %>さんのレビュー一覧</strong>
+  <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>アイテム名</th>
+            <th>評価</th>
+            <th>内容</th>
+            <th></th>
+          </t>
+        </thead>
+        <% @review.each do |review| %>
+        <tbody>
+          <td>
+            <%= link_to item_path(review.item.id) do %>
+              <%= review.item.name %>
+            <% end %>
+          </td>
+          <td>
+            <div id="star_<%= review.id %>"></div>
+            <script>
+$(document).on('turbolinks:load', function() {
+  let elem = document.querySelector('#star_<%= review.id %>');
+  if (elem == null) return;
+
+  elem.innerHTML = "";
+  let opt = {
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: "<%= review.star %>",
+    readOnly: true,
+  };
+  raty(elem, opt);
+});
+</script>
+          </td>
+          <td>
+            <%= review.article %>
+          </td>
+          <td><%= link_to "同アイテムの他レビューを見る", item_reviews_path(review.item), class: "button light ml-3 mt-3" %></td>
+        </tbody>
+        <% end %>
+        </table>
      </div>
 </div>

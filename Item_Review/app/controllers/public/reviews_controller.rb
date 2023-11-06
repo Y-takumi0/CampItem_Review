@@ -9,7 +9,7 @@ def create
   @review = Review.new(review_params)
   @review.user_id = current_user.id
   if @review.save
-    redirect_to  item_path(@review.item_id)
+    redirect_to  item_reviews_path(@review.item_id)
   else
     @Item = Item.find(params[:item_id])
     render 'public/items/show'

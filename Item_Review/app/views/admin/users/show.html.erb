@@ -1,8 +1,4 @@
 <div class="container mt-5">
-  <!-- 更新成功表示 -->
-  <p>
-    <%= flash[:notice] %>
-  </p>
   <div class="row">
     <%= form_with model: @user, url: admin_user_path(@user), method: :patch, local: true do |f| %>
   <h2 class="my-3 bg-light"><%= @user.name %>さんの会員詳細</h2>
@@ -14,19 +10,20 @@
     <% else %>
       <%= image_tag 'no-image', size: "200x200" %>
     <% end %></span>
-    <!-- 会員名の表示 -->
-    <strong class="my-2 col-sm-3">ネーム</strong>
-    <span class="my-2 col-sm-9"><%= @user.name %></span>
-    <!-- 会員名(フリガナ)の表示 -->
-    <strong class="my-2 col-sm-3">プロフィール</strong>
-    <span class="my-2 col-sm-9"><%= @user.plofile %></span>
-    <strong class="my-2 col-sm-3">メールアドレス </strong>
-    <span class="my-2 col-sm-9"><%= @user.email %></span>
-    <!-- 会員ステータスの表示 -->
-    <strong class="my-2 col-sm-3">会員ステータス </strong>
-    <span class="my-2 col-sm-9 color:<%= @user.is_active ? 'green' : 'gray' %>;"><%= @user.is_active ? '有効' : '退会済み' %></span>
-    <!--  -->
-  </div>
+    <table class="table table-hover table-inverse">
+    <tr>
+      <td>ネーム</td>
+      <td><%= @user.name %></td>
+    </tr>
+    <tr>
+      <td>プロフィール</td>
+      <td><%= @user.plofile %></td>
+    </tr>
+    <tr>
+      <td class="bg-light col-md-3">メールアドレス</td>
+      <td><%= @user.email %></td>
+    </tr>
+  </table>
 
   <strong class="my-2 col-sm-3">会員ステータスの更新</strong>
       <div class="my-2 col-sm-9">
@@ -40,4 +37,47 @@
       <div class="my-2 col-lg-9"><%= f.submit "変更を保存", class: "btn btn-success" %></div>
     </div>
     <% end %>
+    <strong><%= @user.name %>さんのレビュー一覧</strong>
+  <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>アイテム名</th>
+            <th>評価</th>
+            <th>内容</th>
+            <th></th>
+          </t>
+        </thead>
+        <% @review.each do |review| %>
+        <tbody>
+          <td>
+            <%= link_to item_path(review.item.id) do %>
+              <%= review.item.name %>
+            <% end %>
+          </td>
+          <td>
+            <div id="star_<%= review.id %>"></div>
+            <script>
+$(document).on('turbolinks:load', function() {
+  let elem = document.querySelector('#star_<%= review.id %>');
+  if (elem == null) return;
+
+  elem.innerHTML = "";
+  let opt = {
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: "<%= review.star %>",
+    readOnly: true,
+  };
+  raty(elem, opt);
+});
+</script>
+          </td>
+          <td>
+            <%= review.article %>
+          </td>
+          <td><%= link_to "同アイテムの他レビューを見る", admin_item_reviews_path(review.item), class: "button light ml-3 mt-3" %></td>
+        </tbody>
+        <% end %>
+        </table>
 </div>

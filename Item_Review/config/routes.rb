@@ -13,10 +13,11 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :items, only: [:index, :show, :new, :edit, :create, :update] do
-     resources :reviews, only: [:index, :create]
+      resources :reviews, only: [:index, :create] do
+        resources :comments, only: [:index, :update, :create]
+      end
     end
     resources :users, only: [:show, :edit, :update]
-    resources :comments, only: [:update, :create]
     resources :follows, only: [:create, :index, :update]
   end
 
@@ -25,10 +26,10 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :items, only: [:index, :new, :create, :show, :edit, :update]
+    resources :items, only: [:index, :new, :create, :show, :edit, :update] do
+      resources :reviews, only: [:index, :update]
+    end
     resources :users, only: [:index, :show, :update]
-    resources :reviews, only: [:new, :show, :update, :create, :destroy]
-    resources :comments, only: [:update]
     resources :categories, only: [:index, :create, :edit, :update]
   end
 

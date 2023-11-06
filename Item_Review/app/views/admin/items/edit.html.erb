@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <%= form_with model: @item, url: admin_item_path(@item), method: :patch, local: true, class: "mx-auto" do |f| %>
-    <% render "public/shared/error_messages", resource: @item %>
+    <% render "admin/shared/error_messages", resource: @item %>
     <!-- 商品画像の更新 -->
     <strong class="my-2 col-sm-3">アイテム画像</strong>
     <div class="my-2 col-sm-9">
@@ -23,7 +23,7 @@
     <!-- 商品ジャンルの更新 -->
     <strong class="my-2 col-sm-3">カテゴリー</strong>
     <div class="my-2 col-sm-9">
-      <%= f.collection_select :category_id, Category.all, :id,:name,{prompt: "--選択してください--"} %>
+      <%= f.collection_select :category_ids, Category.all, :id,:name,{prompt: "--選択してください--"}, {multiple: true} %>
       <%= link_to "カテゴリーの追加", admin_categories_path, class:"btn btn-success ml-3" %>
     </div>
     <!-- 商品税抜価格の更新 -->

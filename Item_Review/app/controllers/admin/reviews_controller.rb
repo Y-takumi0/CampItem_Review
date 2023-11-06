@@ -1,17 +1,17 @@
 class Admin::ReviewsController < ApplicationController
 def index
+  @item = Item.find(params[:item_id])
+  @reviews = @item.reviews
 end
 
-
-def create
-  @review = Review.new(review_params)
-  @review.user_id = current_user.id
-  if @review.save
-    redirect_to  reviews_path(@review.Item)
-  else
-    @Item = Item.find(params[:Item_id])
+  def update
+    @review = Review.find(params[:id])
+    if @review.update(review_params)
+      redirect_to admin_item_reviews_path(@review), notice: "レビューの表示を更新しました。"
+    else
+      render :index
+    end
   end
-end
 
   private
 

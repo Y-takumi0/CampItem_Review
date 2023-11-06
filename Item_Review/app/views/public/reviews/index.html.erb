@@ -1,10 +1,12 @@
 <div class="container">
   <div>
     <header class="card-header">
-      <p class="card-header-title">
+      <p>
+        <%= link_to item_path(@item.id) do %>
         <%= @item.name %>
       </p>
-      <img class="col-sm-3" style="width: 200px; height: 200px;" src="<%= url_for(@item.image) %>">
+      <img style="width: 200px; height: 200px;" src="<%= url_for(@item.image) %>">
+      <% end %>
       </header>
       </div>
       <table class="table is-fullwidth has-text-centered">
@@ -13,13 +15,16 @@
               <th>ユーザー</th>
               <th>点数</th>
               <th>内容</th>
-              <th></th>
+              <th>コメント件数</th>
             </tr>
           </thead>
           <tbody>
             <% @reviews.each do |review| %>
               <tr>
-                <td><%= review.user.name %></td>
+                <td><%= link_to user_path(review.user.id) do %>
+                  <%= review.user.name %>
+                  <% end %>
+                  </td>
               <td>
                 <div id="star_<%= review.id %>"></div>
             <script>
@@ -40,11 +45,12 @@ $(document).on('turbolinks:load', function() {
 </script>
           </td>
                 <td><%= review.article %></td>
+                <td><div>
+  <p><%= review.comments.count %></p>
+
+</div></td>
               </tr>
             <% end %>
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
-</section>

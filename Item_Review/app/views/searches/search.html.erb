@@ -1,0 +1,72 @@
+<h2>検索結果</h2>
+
+<table class="table table-hover table-inverse">
+  <!--検索対象モデルがUserの時 -->
+  <% if @range == "User" %>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>ユーザー名</th>
+        <th>プロフィール</th>
+        <th>レビュー数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><% if user.image.attached? %>
+          <%= image_tag user.image, size: "100x100" %>
+          <% else %>
+          <%= image_tag 'no-image', size: "100x100" %>
+          <% end %>
+          </td>
+          <td>
+            <%= link_to user_path(user.id) do %>
+            <%= user.name %>
+            <% end %>
+          </td>
+          <td><%= user.plofile %></td>
+          <td><%= user.reviews.count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+  <% else %>
+    <!--検索対象モデルがUserではない時(= 検索対象モデルがitemの時) -->
+    <table class="table table-striped">
+    <thead>
+      <tr>
+        <th></th>
+        <th>アイテム名</th>
+        <th>価格</th>
+        <th>カテゴリー</th>
+        <th>販売開始日</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @items.each do |item| %>
+        <tr>
+          <td>
+            <% if item.image.attached? %>
+              <%= image_tag item.image, size: "100x100" %>
+            <% else %>
+              <%= image_tag 'no-image', size: "100x100" %>
+            <% end %>
+          </td>
+          <td><%= link_to item_path(item.id) do %>
+          <%= item.name %>
+          <% end %>
+          </td>
+          <td><%= item.price %></td>
+          <td>
+            <%= item.categories.pluck(:name).join(",") %>
+        </td>
+        <td><%= item.on_sale %></td>
+        <td><%= link_to "レビューを見る", item_reviews_path(item), class: "button light ml-3 mt-3" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
