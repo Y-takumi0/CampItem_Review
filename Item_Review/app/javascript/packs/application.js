@@ -11,6 +11,8 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+require("jquery")
 window.$ = window.jQuery = require('jquery');
 
 import Raty from "raty.js"

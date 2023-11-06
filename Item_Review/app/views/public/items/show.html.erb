@@ -2,6 +2,7 @@
   <div class="row">
     <h4 class="my-3 bg-light">アイテム詳細</h4>
   <div class="row">
+
     <img class="col-sm-3" style="width: 200px; height: 200px;" src="<%= url_for(@item.image) %>">
     <div class="col-sm-9">
       <!-- 商品名の表示 -->
@@ -12,7 +13,7 @@
       <div class="my-2 col-sm-6"><%= @item.introduction %></div>
       <!-- 商品ジャンルの表示 -->
       <strong class="col-sm-3">カテゴリー</strong>
-      <%= @item.categories.pluck(:name).join(",") %>
+      <div><%= @item.categories.pluck(:name).join(",") %></div>
       <!-- 商品価格の表示 -->
       <strong class="col-sm-3">価格</strong>
       <div class="my-2 col-sm-9">
@@ -24,21 +25,7 @@
       <div class="col-sm-3">
         <%= link_to "編集する",edit_item_path(@item), class:"btn btn-success" %>
       </div>
-          <%= render 'public/reviews/form', review: @review, item: @item %>
-      </div>
-              <div id="star-rate<%= @item.id%>"> </td>
-          <script>
-            $('#star-rate<%= @item.id %>').empty();
-            $('#star-rate<%= @item.id%>').raty({
-              size      : 36,
-              starOff   : '<%= asset_path('star-off.png') %>',
-              starOn    : '<%= asset_path('star-on.png') %>',
-              half      : false,
-              readOnly: true,
-              score: <%= @item.star %>,
-            });
-          </script>
-          </div>
     </div>
+    <%= render 'public/reviews/form', review: @review, item: @item %>
   </div>
-</div>
+    </div>

@@ -12,12 +12,12 @@ Rails.application.routes.draw do
   end
 
   scope module: :public do
-    resources :items, only: [:index, :show, :new, :edit, :create, :update]
+    resources :items, only: [:index, :show, :new, :edit, :create, :update] do
+     resources :reviews, only: [:index, :create]
+    end
     resources :users, only: [:show, :edit, :update]
-    resources :reviews, only: [:new, :index, :create, :destroy]
     resources :comments, only: [:update, :create]
     resources :follows, only: [:create, :index, :update]
-    get "search" => "items#search"
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :items, only: [:index, :new, :create, :show, :edit, :update]
     resources :users, only: [:index, :show, :update]
-    resources :reviews, only: [:new, :index, :update, :create, :destroy]
+    resources :reviews, only: [:new, :show, :update, :create, :destroy]
     resources :comments, only: [:update]
     resources :categories, only: [:index, :create, :edit, :update]
   end

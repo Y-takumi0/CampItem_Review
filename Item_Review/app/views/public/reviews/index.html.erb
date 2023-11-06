@@ -1,20 +1,50 @@
 <div class="container">
-  <div class="row">
-    <h4>レビュー一覧</h4>
-  <div class="d-flex justify-content-end">
-    <% @review.each do |review| %>
-      <tr>
-        <td>
-          <%= link_to user_path(review.user.id) do %>
-          <%= review.user.name %>
-          <% end %>
-        </td>
-        <td><%= review.star %></td>
-        <td>
-            <%= review.article %>
-        </td>
-      </tr>
-    <% end %>
-</div>
-</div>
-</div>
+  <div>
+    <header class="card-header">
+      <p class="card-header-title">
+        <%= @item.name %>
+      </p>
+      <img class="col-sm-3" style="width: 200px; height: 200px;" src="<%= url_for(@item.image) %>">
+      </header>
+      </div>
+      <table class="table is-fullwidth has-text-centered">
+        <thead>
+            <tr>
+              <th>ユーザー</th>
+              <th>点数</th>
+              <th>内容</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @reviews.each do |review| %>
+              <tr>
+                <td><%= review.user.name %></td>
+              <td>
+                <div id="star_<%= review.id %>"></div>
+            <script>
+$(document).on('turbolinks:load', function() {
+  let elem = document.querySelector('#star_<%= review.id %>');
+  if (elem == null) return;
+
+  elem.innerHTML = "";
+  let opt = {
+    starOn: "<%= asset_path('star-on.png') %>",
+    starOff: "<%= asset_path('star-off.png') %>",
+    starHalf: "<%= asset_path('star-half.png') %>",
+    score: "<%= review.star %>",
+    readOnly: true,
+  };
+  raty(elem, opt);
+});
+</script>
+          </td>
+                <td><%= review.article %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
