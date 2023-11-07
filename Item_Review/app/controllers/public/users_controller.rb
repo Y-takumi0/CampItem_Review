@@ -2,6 +2,10 @@ class Public::UsersController < ApplicationController
 before_action :authenticate_user!
 before_action :ensure_guest_user, only: [:edit]
 
+  def index
+    @users = User.all
+  end
+
   def show
     @user = User.find(params[:id])
     @review = @user.reviews
@@ -19,6 +23,16 @@ before_action :ensure_guest_user, only: [:edit]
     else
       render :edit
     end
+  end
+
+  def follows
+    @user = User.find(params[:id])
+    @users = @user.followings
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
   end
 
   private

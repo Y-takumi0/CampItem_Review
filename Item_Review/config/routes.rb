@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'relationships/followings'
+  get 'relationships/followers'
   root to: 'homes#top'
   get "search" => "searches#search"
 
@@ -13,12 +15,18 @@ Rails.application.routes.draw do
 
   scope module: :public do
     resources :items, only: [:index, :show, :new, :edit, :create, :update] do
-      resources :reviews, only: [:index, :create] do
-        resources :comments, only: [:index, :update, :create]
+      resources :reviews, only: [:index, :show, :create] do
+        resources :comments, only: [:create]
       end
     end
-    resources :users, only: [:show, :edit, :update]
-    resources :follows, only: [:create, :index, :update]
+    resources :users, only: [:index, :show, :edit, :update] do
+      member do
+      get :follows, :followers
+      end
+      resource :relationships, only: [:create, :destroy]
+        get 'followings' => 'relationships#followings', as: 'followings'
+        get 'followers' => 'relationships#followers', as: 'followers'
+    end
   end
 
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
@@ -33,5 +41,5 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :create, :edit, :update]
   end
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

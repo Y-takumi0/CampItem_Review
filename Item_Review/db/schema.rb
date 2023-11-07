@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_05_073209) do
+ActiveRecord::Schema.define(version: 2023_11_07_040843) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,19 +59,14 @@ ActiveRecord::Schema.define(version: 2023_11_05_073209) do
   end
 
   create_table "comments", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "review_id", null: false
+    t.integer "user_id"
+    t.integer "review_id"
     t.text "content", null: false
     t.boolean "display_status", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "follows", force: :cascade do |t|
-    t.integer "follower_id", null: false
-    t.integer "followed_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.index ["review_id"], name: "index_comments_on_review_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "item_categories", force: :cascade do |t|
@@ -91,6 +86,13 @@ ActiveRecord::Schema.define(version: 2023_11_05_073209) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "star"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -123,6 +125,8 @@ ActiveRecord::Schema.define(version: 2023_11_05_073209) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "reviews"
+  add_foreign_key "comments", "users"
   add_foreign_key "item_categories", "categories"
   add_foreign_key "item_categories", "items"
   add_foreign_key "reviews", "items"

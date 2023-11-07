@@ -8,6 +8,8 @@
         <th></th>
         <th>ユーザー名</th>
         <th>メールアドレス</th>
+        <th>フォロー</td>
+        <th>フォロワー</td>
         <th>ステータス</th>
       </tr>
     </thead>
@@ -27,6 +29,8 @@
           <% end %>
         </td>
         <td><%= user.email %></td>
+        <td><%= user.following.count %></td>
+        <td><%= user.followers.count %></td>
         <td class="<%= user.is_active ? 'text-green' : 'text-greay' %>"><%= user.is_active ? '有効' : '退会済み' %></td>
       </tr>
     <% end %>

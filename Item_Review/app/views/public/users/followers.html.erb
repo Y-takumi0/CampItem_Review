@@ -1,0 +1,38 @@
+<h2>フォロワーユーザー一覧</h2>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th></th>
+        <th>ネーム</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td>
+            <%= link_to user_path(user) do %>
+              <% if user.image.attached? %>
+              <%= image_tag user.image, size: "50x50" %>
+              <% else %>
+              <%= image_tag 'no-image', size: "50x50" %>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= user.name %></td>
+          <td>
+            <%= link_to follows_user_path(user) do %>
+              <h6>フォロー<%= user.followers.count %></h6>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to followers_user_path(user) do %>
+              <h6>フォロワー<%= user.followeds.count %></h6>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>

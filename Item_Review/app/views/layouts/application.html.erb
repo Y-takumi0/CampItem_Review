@@ -19,6 +19,7 @@
           <!-- ユーザーサインイン時のヘッダー -->
           <% if user_signed_in? %>
             <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'マイページ', user_path(current_user.id), class:"nav-link"%></li>
+            <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'ユーザー一覧', users_path, class:"nav-link" %></li>
             <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'アイテム一覧', items_path, class:"nav-link" %></li>
             <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
             <%= render 'homes/search' %>
