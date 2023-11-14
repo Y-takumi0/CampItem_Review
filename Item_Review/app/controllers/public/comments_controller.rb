@@ -1,13 +1,16 @@
 class Public::CommentsController < ApplicationController
 
-def create
-    @comment = current_user.comments.new(comment_params)
-    if @comment.save
-      redirect_back(fallback_location: root_path)  #コメント送信後は、一つ前のページへリダイレクトさせる。
-    else
-      redirect_back(fallback_location: root_path)  #同上
-    end
-end
+  def index
+    @review = Review
+  end
+
+  def create
+    review = Review.find(params[:review])
+    comment = current_user.comments.new(comment_params)
+    comment.review_id = review.id
+    comment.save
+    redirect_to item_review_comments_path(review)
+  end
 
   private
   def comment_params

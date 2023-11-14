@@ -6,7 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -21,8 +21,7 @@
             <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'マイページ', user_path(current_user.id), class:"nav-link"%></li>
             <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'ユーザー一覧', users_path, class:"nav-link" %></li>
             <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'アイテム一覧', items_path, class:"nav-link" %></li>
-            <%= button_to "ログアウト", destroy_user_session_path, method: :delete %>
-            <%= render 'homes/search' %>
+            <li type="button" class="btn btn-outline-dark"><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class:"nav-link" %></li>
           <!-- アドミンサインイン時のヘッダー -->
           <% elsif admin_signed_in? %>
             <li type="button" class="btn btn-outline-dark mr-3"><%= link_to 'アイテム一覧', admin_items_path, class:"nav-link" %></li>
@@ -35,6 +34,7 @@
             <li type="button" class="btn btn-outline-dark"><%= link_to "ログイン", new_user_session_path, class:"nav-link" %></li>
           <% end %>
         </ul>
+          <%= render 'homes/search' %>
         </div>
       </nav>
     </header>

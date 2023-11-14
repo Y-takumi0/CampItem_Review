@@ -50,12 +50,12 @@
   <p><%= review.comments.count %></p>
 
 </div></td>
-<% if user_signed_in? %>
-  <%= form_for @reviwe do |f| %>
-    <%= f.text_field :content %>
-    <%= f.submit %>
+<td>
+  <%= form_with model: @comment, url: item_reviews_path(@item,review) do |f| %>
+    <%= f.text_area :content %>
+    <%= f.submit "コメントする" %>
   <% end %>
-  <hr>
+</td>
               </tr>
             <% end %>
           </tbody>

@@ -4,8 +4,8 @@
       <tr>
         <th></th>
         <th>ネーム</th>
-        <th></th>
-        <th></th>
+        <th>フォロー数</th>
+        <th>フォロワー数</th>
         <th></th>
       </tr>
     </thead>
@@ -24,12 +24,21 @@
           <td><%= user.name %></td>
           <td>
             <%= link_to follows_user_path(user) do %>
-              <h6>フォロー<%= user.followers.count %></h6>
+              <%= user.followings.count %>
             <% end %>
           </td>
           <td>
             <%= link_to followers_user_path(user) do %>
-              <h6>フォロワー<%= user.followeds.count %></h6>
+              <%= user.followers.count %>
+            <% end %>
+          </td>
+          <td>
+            <% if user.id == current_user.id %>
+            <% else %>
+              <% if current_user.following?(user) %>
+              <% else %>
+                <%= link_to "フォローする", user_relationships_path(user.id), method: :post %>
+              <% end %>
             <% end %>
           </td>
         </tr>
