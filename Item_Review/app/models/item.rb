@@ -3,6 +3,7 @@ class Item < ApplicationRecord
   has_many :item_categories, dependent: :destroy
   has_many :categories, through: :item_categories
   has_many :reviews, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   def self.looks(search, word)
     if search == "perfect_match"

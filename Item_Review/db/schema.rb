@@ -61,10 +61,14 @@ ActiveRecord::Schema.define(version: 2023_11_07_040843) do
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "review_id"
-    t.text "content", null: false
+    t.integer "item_id"
+    t.text "content", limit: 1000, default: "", null: false
+    t.string "commit"
+    t.string "controller"
     t.boolean "display_status", default: true, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_comments_on_item_id"
     t.index ["review_id"], name: "index_comments_on_review_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
@@ -125,6 +129,7 @@ ActiveRecord::Schema.define(version: 2023_11_07_040843) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comments", "items"
   add_foreign_key "comments", "reviews"
   add_foreign_key "comments", "users"
   add_foreign_key "item_categories", "categories"

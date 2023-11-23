@@ -19,7 +19,7 @@
       <div class="text-center">
         <tr class="actions text-center">
           <%= f.submit "ログイン", class:"btn btn-primary " %>
-        </td>
+        </tr>
       </div>
       <% end %>
       <h4 class="my-5 col-sm-4 text-center bg-light">会員登録がお済でない方</h4>
@@ -29,7 +29,10 @@
         <%= link_to "こちら",new_user_registration_path %>
         から新規登録を行ってください。
       </div>
-      <%= button_to "ゲストログイン", user_guest_sign_in_path, method: :post %>
+      <h4 class="my-4 col-sm-4 text-center bg-light">ゲストログインする方</h4>
+      <div type="button" class="btn btn-success">
+<%= link_to "ゲストログイン", user_guest_sign_in_path, method: :post %>
+</div>
     </div>
   </div>
 </div>

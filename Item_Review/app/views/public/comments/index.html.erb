@@ -1,0 +1,50 @@
+<div class="container">
+  <div>
+          <%= link_to user_path(@review.user.id) do %>
+          <%= @review.user.name %>
+          <% end %>のレビュー
+  </div>
+  <div>
+    <div id="star_<%= @review.id %>"></div>
+          <script>
+            $(document).on('turbolinks:load', function() {
+            let elem = document.querySelector('#star_<%= @review.id %>');
+            if (elem == null) return;
+              elem.innerHTML = "";
+              let opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                score: "<%= @review.star %>",
+                readOnly: true,
+                };
+              raty(elem, opt);
+            });
+          </script>
+  </div>
+  <div>
+    <%= @review.article %>
+  </div>
+
+　  <table class="table is-fullwidth has-text-centered">
+    <thead>
+    <tr>
+      <th>ユーザー</th>
+      <th>内容</th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @comments.each do |comment| %>
+      <tr>
+        <td>
+          <%= link_to user_path(comment.user.id) do %>
+          <%= comment.user.name %>
+          <% end %>
+        </td>
+        <td>
+          <%= comment.content %>
+        </td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

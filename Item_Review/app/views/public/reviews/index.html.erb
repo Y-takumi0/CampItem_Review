@@ -1,63 +1,64 @@
 <div class="container">
-  <div>
-    <header class="card-header">
-      <p>
-        <%= link_to item_path(@item.id) do %>
-        <%= @item.name %>
-      </p>
-      <img style="width: 200px; height: 200px;" src="<%= url_for(@item.image) %>">
-      <% end %>
-      </header>
-      </div>
-      <table class="table is-fullwidth has-text-centered">
-        <thead>
-            <tr>
-              <th>ユーザー</th>
-              <th>点数</th>
-              <th>内容</th>
-              <th>コメント件数</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @reviews.each do |review| %>
-              <tr>
-                <td><%= link_to user_path(review.user.id) do %>
-                  <%= review.user.name %>
-                  <% end %>
-                  </td>
-              <td>
-                <div id="star_<%= review.id %>"></div>
-            <script>
-              $(document).on('turbolinks:load', function() {
-                let elem = document.querySelector('#star_<%= review.id %>');
-                if (elem == null) return;
-
-                elem.innerHTML = "";
-                let opt = {
-                  starOn: "<%= asset_path('star-on.png') %>",
-                  starOff: "<%= asset_path('star-off.png') %>",
-                  starHalf: "<%= asset_path('star-half.png') %>",
-                  score: "<%= review.star %>",
-                  readOnly: true,
+　<header class="card-header">
+    <%= link_to item_path(@item.id) do %>
+    <p>
+      <%= @item.name %>
+    </p>
+    <img style="width: 200px; height: 200px;" src="<%= url_for(@item.image) %>">
+    <% end %>
+  </header>
+  <table class="table is-fullwidth has-text-centered">
+    <thead>
+    <tr>
+      <th>ユーザー</th>
+      <th>点数</th>
+      <th>内容</th>
+      <th>コメント件数</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+      <% @reviews.each do |review| %>
+      <tr>
+        <td>
+          <%= link_to user_path(review.user.id) do %>
+          <%= review.user.name %>
+          <% end %>
+        </td>
+        <td>
+          <div id="star_<%= review.id %>"></div>
+          <script>
+            $(document).on('turbolinks:load', function() {
+            let elem = document.querySelector('#star_<%= review.id %>');
+            if (elem == null) return;
+              elem.innerHTML = "";
+              let opt = {
+                starOn: "<%= asset_path('star-on.png') %>",
+                starOff: "<%= asset_path('star-off.png') %>",
+                starHalf: "<%= asset_path('star-half.png') %>",
+                score: "<%= review.star %>",
+                readOnly: true,
                 };
-                raty(elem, opt);
-              });
-            </script>
-          </td>
-                <td><%= review.article %></td>
-                <td><div>
-  <p><%= review.comments.count %></p>
-
-</div></td>
-<td>
-  <%= form_with model: @comment, url: item_reviews_path(@item,review) do |f| %>
-    <%= f.text_area :content %>
-    <%= f.submit "コメントする" %>
-  <% end %>
-</td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+              raty(elem, opt);
+            });
+          </script>
+        </td>
+        <td><%= review.article %></td>
+        <td></td>
+        <td><%= link_to item_review_comments_path(review.item.id,review.id) do %>
+        <%= review.comments.count %>
+        <% end %></td>
+        <% if !current_user.guest_user? %>
+        <td>
+          <%= form_with url: item_review_comments_path(review.item.id,review.id), local: true do |f| %>
+          <%= f.text_area :content %>
+          <%= f.submit "コメントする"%>
+          <% end %>
+        </td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

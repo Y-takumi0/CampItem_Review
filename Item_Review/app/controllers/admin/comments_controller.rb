@@ -1,7 +1,10 @@
 class Admin::CommentsController < ApplicationController
 
-  def show
-    @comment = Comment.find(params[:id])
+  def index
+    @comments = Comment.all
+    @item = Item.find(params[:item_id])
+    @review = Review.find(params[:review_id])
+    @user = User.all
   end
 
 def update
@@ -16,7 +19,8 @@ end
 private
 
   def comment_params
-    params.require(:comment).permit(:display_status)
+    params.permit(:content, :review_id, :item_id)
   end
+
 
 end

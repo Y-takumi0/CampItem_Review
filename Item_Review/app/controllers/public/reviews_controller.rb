@@ -3,7 +3,7 @@ before_action :authenticate_user!, only: [:create]
 def index
   @item = Item.find(params[:item_id])
   @reviews = @item.reviews
-  @comment = Comment.new
+  @user = User.all
 end
 
 def create

@@ -1,20 +1,24 @@
 class Public::CommentsController < ApplicationController
 
   def index
-    @review = Review
+    @comments = Comment.all
+    @item = Item.find(params[:item_id])
+    @review = Review.find(params[:review_id])
+    @user = User.all
   end
 
   def create
-    review = Review.find(params[:review])
-    comment = current_user.comments.new(comment_params)
-    comment.review_id = review.id
-    comment.save
-    redirect_to item_review_comments_path(review)
+    @review = Review.find(params[:review_id])
+    @comment = Comment.new(comment_params)
+    @comment.user_id = current_user.id
+    @comment.review_id = @review.id
+    @comment.save
   end
 
   private
+
   def comment_params
-    params.require(:comment).permit(:content, :review_id)  #formにてpost_idパラメータを送信して、コメントへpost_idを格納するようにする必要がある。
+    params.permit(:content, :review_id, :item_id)
   end
 
 end

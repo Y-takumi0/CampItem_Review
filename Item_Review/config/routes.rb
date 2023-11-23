@@ -35,7 +35,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :items, only: [:index, :new, :create, :show, :edit, :update] do
-      resources :reviews, only: [:index, :update]
+      resources :reviews, only: [:index, :destroy] do
+        resources :comments, only: [:index, :destroy]
+      end
     end
     resources :users, only: [:index, :show, :update]
     resources :categories, only: [:index, :create, :edit, :update]
