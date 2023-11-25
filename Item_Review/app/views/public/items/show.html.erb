@@ -1,5 +1,8 @@
 <div class="container">
-    <h4>アイテム詳細</h4>
+  <p>
+    <%= flash[:error] %>
+  </p>
+  <h4>アイテム詳細</h4>
   <div class="row">
     <img class="col-sm-4" style="width: 300px; height: 300px;" src="<%= url_for(@item.image) %>">
     <div class="col-sm-8">

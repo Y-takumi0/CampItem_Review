@@ -1,5 +1,6 @@
 class Public::ReviewsController < ApplicationController
 before_action :authenticate_user!, only: [:create]
+
 def index
   @item = Item.find(params[:item_id])
   @reviews = @item.reviews
@@ -12,10 +13,11 @@ def create
   if @review.save
     redirect_to  item_reviews_path(@review.item_id)
   else
-    @Item = Item.find(params[:item_id])
-    render 'public/items/show'
+    flash[:error] = "レビューに必要な情報が記載されていません"
+    redirect_to request.referer
   end
 end
+
 
   private
 

@@ -27,7 +27,6 @@ class Public::SessionsController < Devise::SessionsController
           flash[:error] = "申し訳ございません。こちらのユーザーは制限させていただいてます。"
           redirect_to new_user_session_path
       else
-        flash[:error] = "必須項目を入力してください。"
       end
     end
   end
