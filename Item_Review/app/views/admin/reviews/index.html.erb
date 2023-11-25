@@ -14,7 +14,7 @@
               <th>点数</th>
               <th>内容</th>
               <th>コメント件数</th>
-              <th>表示ステータス</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -44,22 +44,11 @@ $(document).on('turbolinks:load', function() {
 </script>
           </td>
                 <td><%= review.article %></td>
-                <td><%= review.comments.count %></td>
-                <td><%= review.display_status ? '表示' : '非表示' %>
-      <div>
-      <%= form_with model: review, url: admin_item_reviews_path(review), method: :patch, local: true do |f| %>
-      <div class="my-2 col-sm-9">
-        <%= f.radio_button :display_status, "ture" %>
-        <%= f.label :display_status, "表示" %>
-        <%= f.radio_button :display_status, "false" %>
-        <%= f.label :display_status, "非表示" %>
-      </div>
-      <!-- 更新ボタンの調整 -->
-      <div class="my-2 col-lg-3"></div>
-      <div class="my-2 col-lg-9"><%= f.submit "変更を保存", class: "btn btn-success" %></div>
-      <% end %>
-      </div>
-      </td>
+                <td><%= link_to admin_item_review_comments_path(review.item.id,review.id) do %>
+        <%= review.comments.count %>
+        <% end %></td>
+                <td><%= link_to "削除する", admin_item_review_path(review.item,review.id), method: :delete, class:"btn btn-success text-center" %>
+              </td>
               </tr>
             <% end %>
           </tbody>

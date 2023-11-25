@@ -24,7 +24,7 @@ class Public::SessionsController < Devise::SessionsController
     @user = User.find_by(email: params[:user][:email])
     if @user
       if (@user.valid_password?(params[:user][:password]) && (@user.is_active? == false))
-          flash[:error] = "こちらのユーザーは既に退会済みです。"
+          flash[:error] = "申し訳ございません。こちらのユーザーは制限させていただいてます。"
           redirect_to new_user_session_path
       else
         flash[:error] = "必須項目を入力してください。"

@@ -13,6 +13,7 @@ class Public::CommentsController < ApplicationController
     @comment.user_id = current_user.id
     @comment.review_id = @review.id
     @comment.save
+    redirect_to item_review_comments_path(@review.item,@review.id)
   end
 
   private

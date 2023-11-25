@@ -8,28 +8,28 @@
   <table  class="table table-borderless">
         <tr>
           <td>名前</td>
-          <td><%= f.text_field :name %></td>
+          <td><%= f.text_field :name, :size=>"50" %></td>
         </tr>
         <tr>
   <td>メールアドレス</td>
-  <td><%= f.text_field :email %></td>
+  <td><%= f.text_field :email, :size=>"50" %></td>
   </tr>
         <tr>
   <td>パスワード(6文字以上)</td>
-  <td><%= f.password_field :password %></td>
+  <td><%= f.password_field :password, :size=>"50" %></td>
   </tr>
         <tr>
   <td>
     パスワード(再入力)
     <% f.label :password_confirmation %></td>
-    <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <td><%= f.password_field :password_confirmation, autocomplete: "new-password", :size=>"50" %>
   </td>
   </tr>
   </table>
 
     <div class="text-center">
         <tr class="actions text-center">
-        <%= f.submit "新規登録", class:"btn btn-success" %>
+        <%= f.submit "新規登録", class:"btn btn-primary" %>
         </tr>
       </div>
       <% end %>
@@ -44,5 +44,5 @@
       からログインしてください。</div>
       <h4 class="my-4 col-sm-4 text-center bg-light">ゲストログインする方</h4>
 <div type="button" class="btn btn-success">
-<%= link_to "ゲストログイン", user_guest_sign_in_path, method: :post %>
+<%= link_to "ゲストログイン", user_guest_sign_in_path, method: :post, class:"text-white" %>
 </div>

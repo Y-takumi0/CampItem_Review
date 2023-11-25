@@ -13,6 +13,12 @@ end
     end
   end
 
+  def destroy
+    review = Review.find(params[:id])
+    review.destroy
+    redirect_to admin_item_reviews_path(review.item)
+  end
+
   private
 
   def review_params

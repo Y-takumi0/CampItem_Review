@@ -16,6 +16,13 @@ def update
     end
 end
 
+def destroy
+    @review = Review.find(params[:review_id])
+    comment = Comment.find(params[:id])
+    comment.destroy
+    redirect_to admin_item_review_comments_path(@review.item,@review.id)
+end
+
 private
 
   def comment_params

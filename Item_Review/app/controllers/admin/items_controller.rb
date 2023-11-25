@@ -1,11 +1,15 @@
 class Admin::ItemsController < ApplicationController
+  def new
+    @item = Item.new
+  end
+
   def index
     if params[:category_id].present?
-         @category = Category.find(params[:category_id])
-         @items = @category.items
-      else
-        @items = Item.all
-      end
+      @category = Category.find(params[:category_id])
+      @items = @category.items
+    else
+      @items = Item.all
+    end
   end
 
   def show

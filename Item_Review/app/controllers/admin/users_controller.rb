@@ -9,6 +9,16 @@ class Admin::UsersController < ApplicationController
     @review = @user.reviews
   end
 
+  def follows
+    @user = User.find(params[:id])
+    @users = @user.followings
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+  end
+
   def update
     @users = User.find(params[:id])
     if @users.update(user_params)

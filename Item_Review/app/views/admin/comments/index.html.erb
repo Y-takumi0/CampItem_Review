@@ -1,12 +1,12 @@
 <div class="container">
   <strong>
-          <%= link_to user_path(@review.user.id) do %>
+          <%= link_to admin_user_path(@review.user.id) do %>
           <%= @review.user.name %>
           <% end %>のレビュー
   </strong>
   <div class="row">
     <div class="my-5 col-sm-3">
-    <%= link_to item_path(@item.id) do %>
+    <%= link_to admin_item_path(@item.id) do %>
     <p>
       <%= @item.name %>
     </p>
@@ -33,7 +33,7 @@
       <%= @review.article %>
     </div>
     <div type="button" class="btn btn-info">
-    <%= link_to "レビュー一覧に戻る", item_reviews_path(@item), class: "text-white" %>
+    <%= link_to "レビュー一覧に戻る", admin_item_reviews_path(@item), class: "text-white" %>
     </div>
   </div>
 
@@ -42,6 +42,7 @@
     <tr>
       <th scope="col-sm-3">ユーザー</th>
       <th scope="col-sm-9">内容</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -55,6 +56,7 @@
         <td>
           <%= comment.content %>
         </td>
+        <td><%= link_to "削除する", admin_item_review_comment_path(@review.item,@review.id,comment.id), method: :delete, class:"btn btn-success text-center" %></td>
       <% end %>
     </tbody>
   </table>

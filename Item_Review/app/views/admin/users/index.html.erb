@@ -29,9 +29,9 @@
           <% end %>
         </td>
         <td><%= user.email %></td>
-        <td><%= user.following.count %></td>
+        <td><%= user.followings.count %></td>
         <td><%= user.followers.count %></td>
-        <td class="<%= user.is_active ? 'text-green' : 'text-greay' %>"><%= user.is_active ? '有効' : '退会済み' %></td>
+        <td class="<%= user.is_active ? 'text-green' : 'text-greay' %>"><%= user.is_active ? '有効' : '制限' %></td>
       </tr>
     <% end %>
   </table>
