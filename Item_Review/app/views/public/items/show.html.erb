@@ -31,9 +31,9 @@
       </div>
     </div>
     <% if !current_user.guest_user? %>
-    <%= render 'public/reviews/form', review: @review, item: @item %>
+      <%= render 'public/reviews/form', review: @review, item: @item %>
     <% end %>
     <div type="button" class="btn btn-info">
-    <%= link_to "他のレビューを見る", item_reviews_path(@item), class:"text-white" %>
+      <%= link_to "他のレビューを見る", item_reviews_path(@item), class:"text-white" %>
     </div>
   </div>

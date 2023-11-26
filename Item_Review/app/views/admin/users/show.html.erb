@@ -26,58 +26,57 @@
   </table>
 
   <strong class="my-2 col-sm-3">会員ステータスの更新</strong>
-      <div class="my-2 col-sm-9">
-        <%= f.radio_button :is_active, "ture" %>
-        <%= f.label :is_active, "有効" %>
-        <%= f.radio_button :is_active, "false" %>
-        <%= f.label :is_active, "制限" %>
-      </div>
-      <!-- 更新ボタンの調整 -->
-      <div class="my-2 col-lg-3"></div>
-      <div class="my-2 col-lg-9"><%= f.submit "変更を保存", class: "btn btn-success" %></div>
+    <div class="my-2 col-sm-9">
+      <%= f.radio_button :is_active, "ture" %>
+      <%= f.label :is_active, "有効" %>
+      <%= f.radio_button :is_active, "false" %>
+      <%= f.label :is_active, "制限" %>
     </div>
-    <% end %>
-    <strong><%= @user.name %>さんのレビュー一覧</strong>
+    <!-- 更新ボタンの調整 -->
+    <div class="my-2 col-lg-3"></div>
+    <div class="my-2 col-lg-9"><%= f.submit "変更を保存", class: "btn btn-success" %></div>
+  </div>
+  <% end %>
+  <strong><%= @user.name %>さんのレビュー一覧</strong>
   <table class="table table-hover table-inverse">
-        <thead>
-          <tr>
-            <th>アイテム名</th>
-            <th>評価</th>
-            <th>内容</th>
-            <th></th>
-          </t>
-        </thead>
-        <% @review.each do |review| %>
-        <tbody>
-          <td>
-            <%= link_to item_path(review.item.id) do %>
-              <%= review.item.name %>
-            <% end %>
-          </td>
-          <td>
-            <div id="star_<%= review.id %>"></div>
-            <script>
-$(document).on('turbolinks:load', function() {
-  let elem = document.querySelector('#star_<%= review.id %>');
-  if (elem == null) return;
-
-  elem.innerHTML = "";
-  let opt = {
-    starOn: "<%= asset_path('star-on.png') %>",
-    starOff: "<%= asset_path('star-off.png') %>",
-    starHalf: "<%= asset_path('star-half.png') %>",
-    score: "<%= review.star %>",
-    readOnly: true,
-  };
-  raty(elem, opt);
-});
-</script>
-          </td>
-          <td>
-            <%= review.article %>
-          </td>
-          <td><%= link_to "同アイテムの他レビューを見る", admin_item_reviews_path(review.item), class: "button light ml-3 mt-3" %></td>
-        </tbody>
+    <thead>
+      <tr>
+        <th>アイテム名</th>
+        <th>評価</th>
+        <th>内容</th>
+        <th></th>
+      </tr>
+    </thead>
+    <% @review.each do |review| %>
+    <tbody>
+      <td>
+        <%= link_to item_path(review.item.id) do %>
+          <%= review.item.name %>
         <% end %>
-        </table>
+      </td>
+      <td>
+        <div id="star_<%= review.id %>"></div>
+        <script>
+          $(document).on('turbolinks:load', function() {
+          let elem = document.querySelector('#star_<%= review.id %>');
+          if (elem == null) return;
+            elem.innerHTML = "";
+            let opt = {
+              starOn: "<%= asset_path('star-on.png') %>",
+              starOff: "<%= asset_path('star-off.png') %>",
+              starHalf: "<%= asset_path('star-half.png') %>",
+              score: "<%= review.star %>",
+              readOnly: true,
+            };
+            raty(elem, opt);
+          });
+        </script>
+      </td>
+      <td>
+        <%= review.article %>
+      </td>
+      <td><%= link_to "同アイテムの他レビューを見る", admin_item_reviews_path(review.item), class: "button light ml-3 mt-3" %></td>
+    </tbody>
+    <% end %>
+  </table>
 </div>

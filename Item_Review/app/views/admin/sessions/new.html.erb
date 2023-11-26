@@ -7,20 +7,20 @@
       </p>
       <%= form_with model: @admin, url: admin_session_path do |f| %>
         <table  class="table table-borderless">
-        <tr>
-          <td>メールアドレス</td>
-          <td><%= f.text_field :email, autofocus: true, :size=>"60" %></td>
-        </tr>
-        <tr>
-          <td>パスワード</td>
-          <td><%= f.password_field :password, autofocus: true, :size=>"60" %></td>
-        </tr>
-      </table>
-     <div class="text-center">
-        <tr class="actions text-center">
-          <%= f.submit "ログイン", class:"btn btn-primary " %>
-        </tr>
-      </div>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= f.text_field :email, autofocus: true, :size=>"60" %></td>
+          </tr>
+          <tr>
+            <td>パスワード</td>
+            <td><%= f.password_field :password, autofocus: true, :size=>"60" %></td>
+          </tr>
+        </table>
+        <div class="text-center">
+          <tr class="actions text-center">
+            <%= f.submit "ログイン", class:"btn btn-primary " %>
+          </tr>
+        </div>
       <% end %>
     </div>
   </div>

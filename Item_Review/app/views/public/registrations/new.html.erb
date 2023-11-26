@@ -2,47 +2,47 @@
   <div class="row">
     <div class="col">
       <h4 class="my-5 col-sm-2 text-center bg-light">新規会員登録</h4>
-
-<%= form_with model: @user, url: user_registration_path, id: 'new_user' do |f| %>
-<%= render "public/shared/error_messages", resource: resource %>
-  <table  class="table table-borderless">
-        <tr>
-          <td>名前</td>
-          <td><%= f.text_field :name, :size=>"50" %></td>
-        </tr>
-        <tr>
-  <td>メールアドレス</td>
-  <td><%= f.text_field :email, :size=>"50" %></td>
-  </tr>
-        <tr>
-  <td>パスワード(6文字以上)</td>
-  <td><%= f.password_field :password, :size=>"50" %></td>
-  </tr>
-        <tr>
-  <td>
-    パスワード(再入力)
-    <% f.label :password_confirmation %></td>
-    <td><%= f.password_field :password_confirmation, autocomplete: "new-password", :size=>"50" %>
-  </td>
-  </tr>
-  </table>
-
-    <div class="text-center">
+      <%= form_with model: @user, url: user_registration_path, id: 'new_user' do |f| %>
+      <%= render "public/shared/error_messages", resource: resource %>
+        <table  class="table table-borderless">
+          <tr>
+            <td>名前</td>
+            <td><%= f.text_field :name, :size=>"50" %></td>
+          </tr>
+          <tr>
+            <td>メールアドレス</td>
+            <td><%= f.text_field :email, :size=>"50" %></td>
+          </tr>
+          <tr>
+            <td>パスワード(6文字以上)</td>
+          <td><%= f.password_field :password, :size=>"50" %></td>
+          </tr>
+          <tr>
+            <td>
+              パスワード(再入力)
+              <% f.label :password_confirmation %>
+            </td>
+            <td>
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", :size=>"50" %>
+            </td>
+          </tr>
+        </table>
+      <div class="text-center">
         <tr class="actions text-center">
-        <%= f.submit "新規登録", class:"btn btn-primary" %>
+          <%= f.submit "新規登録", class:"btn btn-primary" %>
         </tr>
       </div>
       <% end %>
     </div>
-    </div>
-
-    <h4 class="my-2 col-sm-4 text-center bg-light">既に登録済みの方</h4>
-      <div class="my-4 col-sm-8"></div>
-      <div class="my-4 col-sm-2"></div>
-      <div class="my-4 col-sm-6">
-        <%= link_to "こちら",new_user_session_path %>
+  </div>
+  <h4 class="my-2 col-sm-4 text-center bg-light">既に登録済みの方</h4>
+    <div class="my-4 col-sm-8"></div>
+    <div class="my-4 col-sm-2"></div>
+    <div class="my-4 col-sm-6">
+      <%= link_to "こちら",new_user_session_path %>
       からログインしてください。</div>
-      <h4 class="my-4 col-sm-4 text-center bg-light">ゲストログインする方</h4>
-<div type="button" class="btn btn-success">
-<%= link_to "ゲストログイン", user_guest_sign_in_path, method: :post, class:"text-white" %>
+  <h4 class="my-4 col-sm-4 text-center bg-light">ゲストログインする方</h4>
+  <div type="button" class="btn btn-success">
+    <%= link_to "ゲストログイン", user_guest_sign_in_path, method: :post, class:"text-white" %>
+  </div>
 </div>
