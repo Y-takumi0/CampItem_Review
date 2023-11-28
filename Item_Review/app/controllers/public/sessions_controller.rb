@@ -5,9 +5,9 @@ class Public::SessionsController < Devise::SessionsController
   before_action :user_state, only: [:create]
 
   # GET /resource/sign_in
-  def new
-    super
-  end
+  #def new
+  #  super
+  #end
 
   # POST /resource/sign_in
   #def create
