@@ -16,7 +16,7 @@
     <% if @user.image.attached? %>
       <%= image_tag @user.image, size: "200x200" %>
     <% else %>
-      <%= image_tag 'no-image', size: "200x200" %>
+      <%= image_tag 'no-image.jpg', size: "200x200" %>
     <% end %>
     <% if !current_user.guest_user? %>
       <% if (@user.id != current_user.id) && !@user.guest_user? %>
